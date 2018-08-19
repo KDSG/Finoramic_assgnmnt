@@ -1,0 +1,19 @@
+import os,subprocess,json
+# as json format is similar to python dictionary so here is sample to the file
+#program by Karan Guleri
+# can work on Windows,Linux system calls 
+Dependencies = { "beautifulsoup4==4.6.3" ,"boto==2.48.0","bz2file==0.98","xxxxx=0.0.0"}
+failed=[]
+flag = True;
+for D in Dependencies:
+    p=subprocess.call("pip install "+D,shell =True)
+    if(p):
+        failed.append(D)
+        flag=False
+        
+    
+if flag:
+    print("success")
+else:
+    print(failed)
+

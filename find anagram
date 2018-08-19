@@ -1,0 +1,52 @@
+bool anagram(string A, string B)
+{
+    if(A.length()!=B.length()) return false;
+    int check1[26];
+    int check2[26];
+    for(int i=0;i<26;i++)
+    {
+        check1[i]=0;check2[i]=0;
+    }
+    for (int i = 0; i<A.length();  i++)
+    {
+        check1[A[i]-'a']++;
+        check2[B[i]-'a']++;
+    }
+    for (int i = 0; i < 26; i++)
+        if (check1[i] != check2[i])
+            return false;
+ 
+    return true;
+}
+
+
+vector<vector<int> > Solution::anagrams(const vector<string> &A) {
+    vector<vector<int>> ans;
+   // vector<string>B = A;
+   bool flag[A.size()];
+   for(int i=0;i<A.size();i++)
+   {
+       flag[i] = true;
+   }
+   //cout<<A.size()<<" ";
+    for(int i=0;i<A.size();i++)
+    {
+        vector<int> v;
+       // cout<<flag[i]<<" ";
+        if(flag[i]==false) continue;
+        
+        v.push_back(i+1);
+        
+        for(int j=i+1;j<A.size();j++)
+        {
+           if(anagram(A[i],A[j]) && flag[j]) 
+           {
+                v.push_back(j+1);
+                flag[j] = false;  
+            }
+       }
+        ans.push_back(v);
+        v.clear();
+    }
+    return ans;
+}
